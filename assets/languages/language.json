@@ -1,0 +1,18 @@
+{
+  "en": {
+    "app_name": "Wasfa",
+    "hello": "Hello",
+    "welcome": "Welcome to Wasfa",
+    "search_prescription": "Search your prescriptionww",
+    "doctor_menu": "Doctor Menu",
+    "logout": "Logout"
+  },
+  "ar": {
+    "app_name": "وصفة",
+    "hello": "مرحبا",
+    "welcome": "Welcome to Wasfa",
+    "search_prescription": "Search your prescriptionss",
+    "doctor_menu": "Doctor Menu",
+    "logout": "Logout"
+  }
+}

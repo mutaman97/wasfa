@@ -123,7 +123,7 @@ class _NewPrescriptionScreenState extends State<NewPrescriptionScreen> {
             Align(
               alignment: Alignment.bottomRight,
               child: Padding(
-                padding: const EdgeInsets.all(15.0),
+                padding: const EdgeInsets.all(30.0),
                 child: FloatingActionButton(
                   onPressed: () async {
                     final String _docID =
@@ -158,6 +158,8 @@ class _NewPrescriptionScreenState extends State<NewPrescriptionScreen> {
                       Navigator.of(context).pop();
                     });
                   },
+                  backgroundColor: Theme.of(context).primaryColor,
+                  shape: const CircleBorder(), 
                   child: const Icon(Icons.done),
                 ),
               ),

@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:erx/app/app_localization.dart';
 import 'package:erx/screens/new_prescription_screen.dart';
 import 'package:erx/utils/color_palette.dart';
 import 'package:erx/utils/svg_strings.dart';
 import 'package:erx/utils/toast.dart';
+import 'package:erx/widgets/drawers/doctor_drawer.dart';
 import 'package:erx/widgets/prescription_card.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -34,6 +36,7 @@ class DoctorHomeScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: ColorPalette.charlestonGreen,
+      drawer: const DoctorDrawer(),
       body: Stack(
         children: [
           SvgPicture.string(
@@ -55,13 +58,21 @@ class DoctorHomeScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       // menu
-                      Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: SizedBox(
-                          height: 25,
-                          width: 25,
-                          child: SvgPicture.string(SvgStrings.hamburger),
-                        ),
+                      Builder(
+                        builder: (context) {
+                          return GestureDetector(
+                            behavior: HitTestBehavior.opaque,
+                            onTap: () => Scaffold.of(context).openDrawer(),
+                            child: Padding(
+                              padding: const EdgeInsets.all(12.0),
+                              child: SizedBox(
+                                height: 25,
+                                width: 25,
+                                child: SvgPicture.string(SvgStrings.hamburger),
+                              ),
+                            ),
+                          );
+                        },
                       ),
                       // logo
                       Row(
@@ -77,7 +88,7 @@ class DoctorHomeScreen extends StatelessWidget {
                                 angle: 8 * 22 / 7 / 180,
                                 child: SvgPicture.string(
                                   SvgStrings.logoE,
-                                  height: 18,
+                                  height: 38,
                                 ),
                               ),
                             ],
@@ -273,7 +284,7 @@ class DoctorHomeScreen extends StatelessWidget {
                                   decoration: InputDecoration(
                                     enabledBorder: InputBorder.none,
                                     border: InputBorder.none,
-                                    hintText: "Search your prescription",
+                                    hintText: AppLocalization.of(context)!.getTranslatedValues('search_prescription') ?? 'Search for prescription',
                                     hintStyle: GoogleFonts.nunito(
                                       fontSize: 16,
                                       color: ColorPalette.coolGrey,
@@ -294,7 +305,7 @@ class DoctorHomeScreen extends StatelessWidget {
                         bottom: 0,
                         child: Container(
                           width: MediaQuery.of(context).size.width,
-                          height: 70,
+                          height: 60,
                           decoration: const BoxDecoration(
                             color: ColorPalette.charlestonGreen,
                             borderRadius: BorderRadius.only(
@@ -335,7 +346,7 @@ class DoctorHomeScreen extends StatelessWidget {
                       Align(
                         alignment: Alignment.bottomCenter,
                         child: Padding(
-                          padding: const EdgeInsets.only(bottom: 35),
+                          padding: const EdgeInsets.only(bottom: 30),
                           child: FloatingActionButton(
                             onPressed: () {
                               Navigator.of(context).push(
