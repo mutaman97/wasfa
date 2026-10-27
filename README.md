@@ -1,12 +1,12 @@
 <img src="./readme_assets/Logo-horizontal.png" width="70%">
 
-## Google Solution Challenge 
+<!-- ## Google Solution Challenge 
 This project is a part of the solution for the problem statement for [Google Solution Challenge 2022](https://developers.google.com/community/gdsc-solution-challenge). 
 The mission of the 2022 Solution Challenge is to solve for one or more of the United Nations 17 Sustainable Development Goals using Google technology.
 In this project, we are trying to solve the following UN Goals:
 
 <img src="./readme_assets/UN1.png" width="100" height="100"><img src="./readme_assets/UN2.png" width="100" height="100"><img src="./readme_assets/UN3.png" width="100" height="100"><img src="./readme_assets/UN5.png" width="100" height="100">
-
+ -->
 
 
 ## 📜Project Details
@@ -15,9 +15,9 @@ In this project, we are trying to solve the following UN Goals:
 * A standard format makes sure that there is no chance of misunderstanding or misinterpretation. All the prescriptions, regardless of the hospital or the doctor will have a fixed format that will have all the necessary information. Thus, all the parties know what to expect from the prescriptions. 
 * The Paperless and Contactless transaction model will ensure that there is no need for paper, thus making the entire system more sustainable. Also, the handling of the prescriptions will be entirely digital and contactless, making it very convenient to use and share with the pharmacist. 
 
-> Our main goal is to create a unified platform/interface for standardizing the prescriptions in India.
+> Our main goal is to create a unified platform/interface for standardizing the prescriptions in Sudan.
 
-<p><img src="./readme_assets/youtube.png" height="14"> Intro Video: <a href = "https://youtu.be/yGIn7IrzZzw">Youtube</a></p>
+<!-- <p><img src="./readme_assets/youtube.png" height="14"> Intro Video: <a href = "https://youtu.be/yGIn7IrzZzw">Youtube</a></p> -->
 
 ## 💻Technology Stack 
 
@@ -52,8 +52,8 @@ In this project, we are trying to solve the following UN Goals:
 
 1. Clone the repository & Change directory
 ```sh
-git clone https://github.com/HeveshL/eRx
-cd erx
+git clone https://github.com/mutaman97/wasfa.git
+cd wasfa
 ```
 2. Flutter pub get & run
 ```sh
@@ -67,7 +67,7 @@ Could be used by directly downloading and installing the apk.
 
 Download Links:
 
-`v0.1-alpha`: [download](https://github.com/HeveshL/eRx/releases/download/v0.1-alpha/app-release.apk) (.apk)
+<!-- `v0.1-alpha`: [download](https://github.com/HeveshL/eRx/releases/download/v0.1-alpha/app-release.apk) (.apk) -->
 
 
 ## 📱User Experience
@@ -83,9 +83,9 @@ Download Links:
 
 Distributed under the MIT License. See `LICENSE` for more information.
 
-## 👦Authors
+<!-- ## 👦Authors
 
 - Hevesh Lakhwani [@heveshL](https://github.com/HeveshL)
 - Shubham Joshi [@Shubhamjoshi301](https://github.com/Shubhamjoshi301)
 - Henay Lakhwani [@henaylakhwani](https://github.com/henaylakhwani)
-- Yash Thakre [@thakreyn](https://github.com/thakreyn)
+- Yash Thakre [@thakreyn](https://github.com/thakreyn) -->
