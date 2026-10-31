@@ -3,16 +3,19 @@
     "app_name": "Wasfa",
     "hello": "Hello",
     "welcome": "Welcome to Wasfa",
-    "search_prescription": "Search your prescriptionww",
+    "search_prescription": "Search for prescription",
     "doctor_menu": "Doctor Menu",
-    "logout": "Logout"
+    "logout": "Logout",
+    "great_day": "Hope you have a great day!"
   },
   "ar": {
     "app_name": "وصفة",
     "hello": "مرحبا",
+    "hello_dr": "مرحباً دكتور",
     "welcome": "Welcome to Wasfa",
-    "search_prescription": "Search your prescriptionss",
+    "search_prescription": "إبحث عن وصفة طبية",
     "doctor_menu": "Doctor Menu",
+    "great_day": "أتمنى أن يكون يومك رائعاً!",
     "logout": "Logout"
   }
 }

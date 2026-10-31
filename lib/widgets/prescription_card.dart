@@ -1,4 +1,6 @@
 import 'dart:ui';
+
+import 'package:erx/app/app_theme.dart';
 import 'package:erx/screens/prescription_screen.dart';
 import 'package:erx/utils/color_palette.dart';
 import 'package:erx/utils/svg_strings.dart';
@@ -27,22 +29,21 @@ class PrescriptionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 20.0,
-        vertical: 10,
-      ),
+      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
       child: GestureDetector(
         onTap: () {
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (context) => PrescriptionScreen(
                 prescriptionId: prescriptionId,
-                doctorName: "Sakhir Ahmed",
+                doctorName: "SGakhir Ahmed",
                 hospitalName: "Orange City Hospital",
                 patientName: "John Smith",
-                hospitalAddress:
-                    "19, Khamla Road Veer Sawarkar Square, Tatya Tope Nagar, Nagpu,Maharashtra- 440015",
+                hospitalAddress: "19, Khamla Road Veer Sawarkar Square, Tatya Tope Nagar, Nagpu,Maharashtra- 440015",
                 prescriptionDate: "10-03-2022",
                 diagnosis: "Abc test, xyz test",
                 knownHistory: "Diabetes",
@@ -56,9 +57,7 @@ class PrescriptionCard extends StatelessWidget {
           );
         },
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(
-            _borderRadius,
-          ),
+          borderRadius: BorderRadius.circular(_borderRadius),
           child: SizedBox(
             height: 115,
             width: double.infinity,
@@ -70,17 +69,12 @@ class PrescriptionCard extends StatelessWidget {
                   fit: BoxFit.fitHeight,
                 ),
                 BackdropFilter(
-                  filter: ImageFilter.blur(
-                    sigmaX: 15,
-                    sigmaY: 15,
-                  ),
+                  filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
                   child: Container(
-                    color: ColorPalette.charlestonGreen.withValues(alpha: 0.3),
+                    color: colors.primaryColor.withValues(alpha: 0.3),
                   ),
                 ),
-                Container(
-                  color: const Color.fromARGB(255, 15, 18, 24).withValues(alpha: 0.6),
-                ),
+                Container(color: colors.secondaryColor.withValues(alpha: 0.6)),
                 // Content
                 Padding(
                   padding: const EdgeInsets.all(18.0),
@@ -93,8 +87,8 @@ class PrescriptionCard extends StatelessWidget {
                           // Hospital name
                           Text(
                             hospitalName,
-                            style: GoogleFonts.nunito(
-                              color: ColorPalette.honeyDew,
+                            style: GoogleFonts.notoKufiArabic(
+                              color: colors.textDefaultColor,
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
                             ),
@@ -103,13 +97,11 @@ class PrescriptionCard extends StatelessWidget {
                           Row(
                             children: [
                               SvgPicture.string(SvgStrings.calendar),
-                              const SizedBox(
-                                width: 5,
-                              ),
+                              const SizedBox(width: 5),
                               Text(
                                 prescriptionDate,
-                                style: GoogleFonts.nunito(
-                                  color: ColorPalette.honeyDew,
+                                style: GoogleFonts.notoKufiArabic(
+                                  color: colors.textDefaultColor,
                                   fontSize: 12,
                                   fontWeight: FontWeight.w600,
                                 ),
@@ -118,14 +110,12 @@ class PrescriptionCard extends StatelessWidget {
                           ),
                         ],
                       ),
-                      const SizedBox(
-                        height: 5,
-                      ),
+                      const SizedBox(height: 5),
                       // Doctor's name
                       Text(
                         doctorName ?? '',
-                        style: GoogleFonts.nunito(
-                          color: ColorPalette.honeyDew,
+                        style: GoogleFonts.notoKufiArabic(
+                          color: colors.textDefaultColor,
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
                         ),
@@ -137,8 +127,8 @@ class PrescriptionCard extends StatelessWidget {
                           // patient name
                           Text(
                             patientName,
-                            style: GoogleFonts.nunito(
-                              color: ColorPalette.honeyDew,
+                            style: GoogleFonts.notoKufiArabic(
+                              color: colors.textLightColor,
                               fontSize: 14,
                               fontWeight: FontWeight.w600,
                             ),
@@ -147,13 +137,11 @@ class PrescriptionCard extends StatelessWidget {
                           Row(
                             children: [
                               SvgPicture.string(SvgStrings.followUp),
-                              const SizedBox(
-                                width: 5,
-                              ),
+                              const SizedBox(width: 5),
                               Text(
                                 followUpDate ?? '',
                                 style: GoogleFonts.nunito(
-                                  color: ColorPalette.malachiteGreen,
+                                  color: colors.territoryColor,
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
                                 ),
