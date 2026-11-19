@@ -2,7 +2,6 @@ import 'dart:ui';
 
 import 'package:erx/app/app_theme.dart';
 import 'package:erx/screens/prescription_screen.dart';
-import 'package:erx/utils/color_palette.dart';
 import 'package:erx/utils/svg_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -19,6 +18,15 @@ class PrescriptionCard extends StatelessWidget {
     required this.prescriptionDate,
     this.followUpDate,
     required this.prescriptionId,
+    // Add the rest of the fields here so they can be passed from Firestore
+    this.hospitalAddress,
+    this.patientAge,
+    this.patientTemp,
+    this.patientWeight,
+    this.patientBp,
+    this.patientHeight,
+    this.knownHistory,
+    this.diagnosis,
   }) : super(key: key);
   final String hospitalName;
   final String prescriptionId;
@@ -26,6 +34,16 @@ class PrescriptionCard extends StatelessWidget {
   final String patientName;
   final String prescriptionDate;
   final String? followUpDate;
+
+  // New fields
+  final String? hospitalAddress;
+  final int? patientAge;
+  final int? patientTemp;
+  final int? patientWeight;
+  final String? patientBp;
+  final String? patientHeight;
+  final String? knownHistory;
+  final String? diagnosis;
 
   @override
   Widget build(BuildContext context) {
@@ -40,18 +58,18 @@ class PrescriptionCard extends StatelessWidget {
             MaterialPageRoute(
               builder: (context) => PrescriptionScreen(
                 prescriptionId: prescriptionId,
-                doctorName: "SGakhir Ahmed",
-                hospitalName: "Orange City Hospital",
-                patientName: "John Smith",
-                hospitalAddress: "19, Khamla Road Veer Sawarkar Square, Tatya Tope Nagar, Nagpu,Maharashtra- 440015",
-                prescriptionDate: "10-03-2022",
-                diagnosis: "Abc test, xyz test",
-                knownHistory: "Diabetes",
-                patientAge: 24,
-                patientBp: "120/80",
-                patientHeight: "5\"6'",
-                patientTemp: 32,
-                patientWeight: 74,
+                doctorName: doctorName ?? 'Unknown Doctor',
+                hospitalName: hospitalName,
+                patientName: patientName,
+                hospitalAddress: hospitalAddress ?? 'No address provided',
+                prescriptionDate: prescriptionDate,
+                diagnosis: diagnosis,
+                knownHistory: knownHistory,
+                patientAge: patientAge,
+                patientBp: patientBp,
+                patientHeight: patientHeight,
+                patientTemp: patientTemp,
+                patientWeight: patientWeight,
               ),
             ),
           );
@@ -102,13 +120,18 @@ class PrescriptionCard extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             // Hospital name
-                            Text(
-                              hospitalName,
-                              style: GoogleFonts.notoKufiArabic(
-                                color: colors.textDefaultColor,
-                                fontSize: 18,
+                            Expanded(
+                              child: Text(
+                                hospitalName,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: GoogleFonts.notoKufiArabic(
+                                  color: colors.textDefaultColor,
+                                  fontSize: 18,
+                                ),
                               ),
                             ),
+                            const SizedBox(width: 8), // Spacing
                             // Prescription Date
                             Row(
                               children: [
@@ -134,12 +157,16 @@ class PrescriptionCard extends StatelessWidget {
                         ),
                         const SizedBox(height: 5),
                         // Doctor's name
-                        Text(
-                          doctorName ?? '',
-                          style: GoogleFonts.notoKufiArabic(
-                            color: colors.textDefaultColor,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
+                        Expanded(
+                          child: Text(
+                            doctorName ?? '',
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: GoogleFonts.notoKufiArabic(
+                              color: colors.textDefaultColor,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                            ),
                           ),
                         ),
                         const Expanded(child: SizedBox()),
@@ -147,14 +174,19 @@ class PrescriptionCard extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             // patient name
-                            Text(
-                              patientName,
-                              style: GoogleFonts.notoKufiArabic(
-                                color: colors.textLightColor,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w600,
+                            Expanded(
+                              child: Text(
+                                patientName,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: GoogleFonts.notoKufiArabic(
+                                  color: colors.textDefaultColor,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600,
+                                ),
                               ),
                             ),
+                            const SizedBox(width: 8), // Spacing
                             // Followup Date
                             Row(
                               children: [

@@ -16,7 +16,7 @@ class UserTypeScreen extends StatefulWidget {
 }
 
 class _UserTypeScreenState extends State<UserTypeScreen> {
-  int _userType = 0;
+  int _userType = 2;
   final List<String> _userTypes = [
     'patient',
     'pharmacist',
@@ -52,18 +52,18 @@ class _UserTypeScreenState extends State<UserTypeScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    // GestureDetector(
-                    //   child: UserTypeTile(
-                    //     svgString: SvgStrings.patient,
-                    //     userType: "Patient",
-                    //     isSelected: _userType == 0,
-                    //   ),
-                    //   onTap: () {
-                    //     setState(() {
-                    //       _userType = 0;
-                    //     });
-                    //   },
-                    // ),
+                    GestureDetector(
+                      child: UserTypeTile(
+                        svgString: SvgStrings.patient,
+                        userType: "Patient",
+                        isSelected: _userType == 0,
+                      ),
+                      onTap: () {
+                        setState(() {
+                          _userType = 0;
+                        });
+                      },
+                    ),
                     GestureDetector(
                       onTap: () {
                         setState(() {

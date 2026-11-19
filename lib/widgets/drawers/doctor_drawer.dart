@@ -110,10 +110,7 @@ class const DoctorDrawer({Key? key}) extends StatelessWidget {
               gradient: LinearGradient(
                 begin: Alignment.bottomLeft,
                 end: Alignment.topRight,
-                colors: [
-                  colors.backgroundColor,
-                  colors.territoryColor, // Your red accent
-                ],
+                colors: [colors.backgroundColor, colors.territoryColor],
               ),
             ),
             child: Column(

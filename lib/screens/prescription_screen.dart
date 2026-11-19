@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:erx/app/app_theme.dart';
 import 'package:erx/utils/color_palette.dart';
 import 'package:erx/utils/svg_strings.dart';
 import 'package:erx/widgets/glass_box.dart';
@@ -23,6 +24,7 @@ class PrescriptionScreen extends StatelessWidget {
     this.patientHeight,
     this.knownHistory,
     this.diagnosis,
+    this.medications,
   }) : super(key: key);
   final String prescriptionId;
   final String hospitalName;
@@ -37,11 +39,13 @@ class PrescriptionScreen extends StatelessWidget {
   final String? patientHeight;
   final String? knownHistory;
   final String? diagnosis;
+  final List<dynamic>? medications; // List of dynamic objects for medicines
 
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
     return Scaffold(
-      backgroundColor: ColorPalette.chineseBlack,
+      backgroundColor: colors.backgroundColor,
       body: SafeArea(
         child: Stack(
           children: [
@@ -57,17 +61,12 @@ class PrescriptionScreen extends StatelessWidget {
               child: SvgPicture.string(SvgStrings.rightBlob),
             ),
             BackdropFilter(
-              filter: ImageFilter.blur(
-                sigmaX: 30,
-                sigmaY: 30,
-              ),
+              filter: ImageFilter.blur(sigmaX: 30, sigmaY: 30),
               child: Container(
-                color: ColorPalette.charlestonGreen.withValues(alpha: 0.3),
+                color: colors.backgroundColor.withValues(alpha: 0.3),
               ),
             ),
-            Container(
-              color: const Color.fromARGB(255, 15, 18, 24).withValues(alpha: 0.7),
-            ),
+            Container(color: colors.backgroundColor.withValues(alpha: 0.7)),
             // Content
             SingleChildScrollView(
               child: Padding(
@@ -75,10 +74,7 @@ class PrescriptionScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SizedBox(
-                      width: double.infinity,
-                      height: 25,
-                    ),
+                    const SizedBox(width: double.infinity, height: 25),
                     // logo
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -86,142 +82,144 @@ class PrescriptionScreen extends StatelessWidget {
                         Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            const SizedBox(
-                              height: 5,
-                            ),
+                            const SizedBox(height: 5),
                             Transform.rotate(
                               angle: 8 * 22 / 7 / 180,
                               child: SvgPicture.string(
                                 SvgStrings.logoE,
-                                height: 18,
+                                height: 38,
                               ),
                             ),
                           ],
                         ),
                         Text(
-                          "prescription",
+                          "wasfa",
                           style: GoogleFonts.nunito(
-                            color: ColorPalette.honeyDew,
+                            color: colors.textDefaultColor,
                             fontSize: 24,
                             fontWeight: FontWeight.w800,
                           ),
                         ),
                       ],
                     ),
-                    const SizedBox(
-                      height: 40,
-                    ),
+                    const SizedBox(height: 40),
                     // Hospital details
                     Text(
                       hospitalName,
-                      style: GoogleFonts.nunito(
-                        color: ColorPalette.malachiteGreen,
+                      style: GoogleFonts.notoKufiArabic(
+                        color: colors.territoryColor,
                         fontSize: 22,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(
-                      height: 5,
-                    ),
+                    const SizedBox(height: 5),
                     Text(
                       "Dr. $doctorName",
-                      style: GoogleFonts.nunito(
-                        color: ColorPalette.honeyDew,
+                      style: GoogleFonts.notoKufiArabic(
+                        color: colors.textDefaultColor,
                         fontSize: 18,
-                        fontWeight: FontWeight.normal,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(
-                      height: 5,
-                    ),
+                    const SizedBox(height: 5),
                     Text(
                       hospitalAddress,
-                      style: GoogleFonts.nunito(
-                        color: ColorPalette.honeyDew,
-                        fontSize: 14,
+                      style: GoogleFonts.notoKufiArabic(
+                        color: colors.textDefaultColor,
+                        fontSize: 15,
                         fontWeight: FontWeight.normal,
                       ),
                     ),
-                    const SizedBox(
-                      height: 40,
-                    ),
+                    const SizedBox(height: 40),
                     Row(
                       children: [
-                        Text(
-                          "Id: ",
-                          style: GoogleFonts.nunito(
-                            color: ColorPalette.malachiteGreen,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
+                        Padding(
+                          padding: const EdgeInsetsDirectional.only(end: 8.0),
+                          child: Text(
+                            "Id:",
+                            style: GoogleFonts.notoKufiArabic(
+                              color: colors.territoryColor,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                         Text(
-                          "1234",
-                          style: GoogleFonts.nunito(
-                            color: ColorPalette.honeyDew,
+                          prescriptionId,
+                          style: GoogleFonts.notoKufiArabic(
+                            color: colors.textDefaultColor,
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         const Expanded(child: SizedBox()),
-                        const Padding(
-                          padding: EdgeInsets.only(right: 8.0),
+                        Padding(
+                          padding: const EdgeInsetsDirectional.only(end: 8.0),
                           child: Icon(
-                            Icons.calendar_today,
-                            color: ColorPalette.honeyDew,
-                            size: 16,
+                            Icons.calendar_month,
+                            color: colors.textDefaultColor,
+                            size: 20,
                           ),
                         ),
                         Text(
                           prescriptionDate,
-                          style: GoogleFonts.nunito(
-                            color: ColorPalette.honeyDew,
+                          style: GoogleFonts.notoKufiArabic(
+                            color: colors.textDefaultColor,
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                       ],
                     ),
-                    const SizedBox(
-                      height: 40,
-                    ),
+                    const SizedBox(height: 40),
                     SizedBox(
                       child: Text(
-                        "Patients's Details",
-                        style: GoogleFonts.nunito(
-                          color: ColorPalette.malachiteGreen,
+                        "Patient Details",
+                        style: GoogleFonts.notoKufiArabic(
+                          color: colors.territoryColor,
                           fontSize: 22,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
-                    const SizedBox(
-                      height: 20,
-                    ),
+                    const SizedBox(height: 20),
                     Row(
                       children: [
-                        Text(
-                          "Name: $patientName",
-                          style: GoogleFonts.nunito(
-                            color: ColorPalette.honeyDew,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
+                        // Wrap Name in Expanded with a flex value
+                        Expanded(
+                          flex: 3, // Name gets 3 parts of the available space
+                          child: Text(
+                            "Name: $patientName",
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: GoogleFonts.notoKufiArabic(
+                              color: colors.textDefaultColor,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
-                        const Expanded(child: SizedBox()),
-                        Text(
-                          "Age: $patientAge years",
-                          style: GoogleFonts.nunito(
-                            color: ColorPalette.honeyDew,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
+                        const SizedBox(
+                          width: 10,
+                        ), // Add a little space between them
+                        // Wrap Age in Expanded with a smaller flex value
+                        Expanded(
+                          flex: 2, // Age gets 2 parts of the available space
+                          child: Text(
+                            "Age: ${patientAge ?? '-'} years",
+                            textAlign: TextAlign.end, // Align age to the end (right in LTR, left in RTL)
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: GoogleFonts.notoKufiArabic(
+                              color: colors.textDefaultColor,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ],
                     ),
-                    const SizedBox(
-                      height: 20,
-                    ),
+                    const SizedBox(height: 20),
                     Center(
                       child: Wrap(
                         runSpacing: 20,
@@ -232,8 +230,9 @@ class PrescriptionScreen extends StatelessWidget {
                             svgString: SvgStrings.temperature,
                           ),
                           GlassBox(
-                            text:
-                                patientWeight == null ? "-" : "$patientWeight",
+                            text: patientWeight == null
+                                ? "-"
+                                : "$patientWeight",
                             svgString: SvgStrings.weight,
                           ),
                           GlassBox(
@@ -241,58 +240,51 @@ class PrescriptionScreen extends StatelessWidget {
                             svgString: SvgStrings.waterDrop,
                           ),
                           GlassBox(
-                            text:
-                                patientHeight == null ? "-" : "$patientHeight",
+                            text: patientHeight == null
+                                ? "-"
+                                : "$patientHeight",
                             svgString: SvgStrings.height,
                           ),
                         ],
                       ),
                     ),
 
-                    const SizedBox(
-                      height: 40,
-                    ),
+                    const SizedBox(height: 40),
                     SizedBox(
                       child: Text(
                         "Known History",
-                        style: GoogleFonts.nunito(
-                          color: ColorPalette.malachiteGreen,
+                        style: GoogleFonts.notoKufiArabic(
+                          color: colors.territoryColor,
                           fontSize: 22,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
-                    const SizedBox(
-                      height: 5,
-                    ),
+                    const SizedBox(height: 5),
                     Text(
                       knownHistory ?? '-',
-                      style: GoogleFonts.nunito(
-                        color: ColorPalette.honeyDew,
+                      style: GoogleFonts.notoKufiArabic(
+                        color: colors.textDefaultColor,
                         fontSize: 16,
                         fontWeight: FontWeight.normal,
                       ),
                     ),
-                    const SizedBox(
-                      height: 30,
-                    ),
+                    const SizedBox(height: 30),
                     SizedBox(
                       child: Text(
                         "Diagnosis",
-                        style: GoogleFonts.nunito(
-                          color: ColorPalette.malachiteGreen,
+                        style: GoogleFonts.notoKufiArabic(
+                          color: colors.territoryColor,
                           fontSize: 22,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
-                    const SizedBox(
-                      height: 5,
-                    ),
+                    const SizedBox(height: 5),
                     Text(
                       diagnosis ?? '-',
-                      style: GoogleFonts.nunito(
-                        color: ColorPalette.honeyDew,
+                      style: GoogleFonts.notoKufiArabic(
+                        color: colors.textDefaultColor,
                         fontSize: 16,
                         fontWeight: FontWeight.normal,
                       ),
@@ -306,9 +298,9 @@ class PrescriptionScreen extends StatelessWidget {
               left: 15,
               top: 15,
               child: IconButton(
-                icon: const Icon(
+                icon: Icon(
                   Icons.close_rounded,
-                  color: ColorPalette.honeyDew,
+                  color: colors.textDefaultColor,
                   size: 30,
                 ),
                 onPressed: () {

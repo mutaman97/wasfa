@@ -225,41 +225,77 @@ class DoctorHomeScreen extends StatelessWidget {
                                                   height: 50,
                                                 );
                                               }
+
+                                              // Define the document data once to keep the code clean
+                                              final doc = snapshot
+                                                  .data!
+                                                  .docs[index - 1];
+                                              final data =
+                                                  doc.data()
+                                                      as Map<String, dynamic>;
+                                              final patientData =
+                                                  data['patient']
+                                                      as Map<
+                                                        String,
+                                                        dynamic
+                                                      >? ??
+                                                  {};
+                                              final generalInfo =
+                                                  patientData['generalInfo']
+                                                      as Map<
+                                                        String,
+                                                        dynamic
+                                                      >? ??
+                                                  {};
+
                                               return PrescriptionCard(
-                                                prescriptionId: snapshot
-                                                    .data!
-                                                    .docs[index - 1]
-                                                    .id,
+                                                prescriptionId: doc.id,
                                                 hospitalName:
-                                                    snapshot
-                                                            .data!
-                                                            .docs[index - 1]
-                                                            .data()['hospital']
-                                                        as String,
+                                                    data['hospital']
+                                                        as String? ??
+                                                    'Unknown Hospital',
                                                 prescriptionDate: f.format(
-                                                  (snapshot
-                                                              .data!
-                                                              .docs[index - 1]
-                                                              .data()['dateTime']
+                                                  (data['dateTime']
                                                           as Timestamp)
                                                       .toDate(),
                                                 ),
                                                 followUpDate:
-                                                    snapshot
-                                                            .data!
-                                                            .docs[index - 1]
-                                                            .data()['followUp']
-                                                        as String?,
+                                                    data['followUp'] as String?,
                                                 patientName:
-                                                    (snapshot
-                                                                .data!
-                                                                .docs[index - 1]
-                                                                .data()['patient']
-                                                            as Map<
-                                                              String,
-                                                              dynamic
-                                                            >)['name']
-                                                        as String,
+                                                    patientData['name']
+                                                        as String? ??
+                                                    'Unknown Patient',
+
+                                                // Newly added parameters based on your Firestore document:
+                                                doctorName:
+                                                    data['doctorName']
+                                                        as String?,
+                                                diagnosis:
+                                                    data['diagnosis']
+                                                        as String?,
+                                                knownHistory:
+                                                    data['knownHistory']
+                                                        as String?,
+
+                                                // Extract from nested maps and convert to strings
+                                                patientAge: int.tryParse(
+                                                  patientData['age']
+                                                          ?.toString() ??
+                                                      '',
+                                                ),
+
+                                                patientWeight: int.tryParse(
+                                                  generalInfo['weight']
+                                                          ?.toString() ??
+                                                      '',
+                                                ),
+                                                patientBp: generalInfo['bp']
+                                                    ?.toString(),
+                                                patientTemp: int.tryParse(
+                                                  generalInfo['temperature']
+                                                          ?.toString() ??
+                                                      '',
+                                                ),
                                               );
                                             },
                                           );
