@@ -1,5 +1,5 @@
 import 'package:erx/handlers/user_type_handler.dart';
-import 'package:erx/screens/login_screen.dart';
+import 'package:erx/screens/auth/login_screen.dart';
 import 'package:erx/widgets/customer_loader.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

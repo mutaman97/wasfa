@@ -1,4 +1,4 @@
-import 'package:erx/screens/splash_screen_3.dart';
+import 'package:erx/screens/splash/splash_screen_3.dart';
 import 'package:erx/utils/color_palette.dart';
 import 'package:erx/utils/svg_strings.dart';
 import 'package:flutter/material.dart';
@@ -16,17 +16,14 @@ class _SplashScreen2State extends State<SplashScreen2> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(
-      const Duration(milliseconds: 1100),
-      () {
-        Navigator.of(context).pushReplacement(
-          PageRouteBuilder(
-            transitionDuration: const Duration(seconds: 1),
-            pageBuilder: (context, a1, a2) => const SplashScreen3(),
-          ),
-        );
-      },
-    );
+    Future.delayed(const Duration(milliseconds: 1100), () {
+      Navigator.of(context).pushReplacement(
+        PageRouteBuilder(
+          transitionDuration: const Duration(seconds: 1),
+          pageBuilder: (context, a1, a2) => const SplashScreen3(),
+        ),
+      );
+    });
   }
 
   @override
@@ -42,17 +39,12 @@ class _SplashScreen2State extends State<SplashScreen2> {
                 Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const SizedBox(
-                      height: 14,
-                    ),
+                    const SizedBox(height: 14),
                     Hero(
                       tag: "e",
                       child: Transform.rotate(
                         angle: 8 * 22 / 7 / 180,
-                        child: SvgPicture.string(
-                          SvgStrings.logoE,
-                          height: 40,
-                        ),
+                        child: SvgPicture.string(SvgStrings.logoE, height: 40),
                       ),
                     ),
                   ],

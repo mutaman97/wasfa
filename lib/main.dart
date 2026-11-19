@@ -2,7 +2,7 @@ import 'package:erx/app/app_localization.dart';
 import 'package:erx/app/app_theme.dart';
 import 'package:erx/data/cubits/system/app_theme_cubit.dart';
 import 'package:erx/providers/locale_provider.dart';
-import 'package:erx/screens/splash_screen_1.dart';
+import 'package:erx/screens/splash/splash_screen_1.dart';
 // import 'package:erx/utils/color_palette.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';

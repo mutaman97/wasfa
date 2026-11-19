@@ -56,104 +56,127 @@ class PrescriptionCard extends StatelessWidget {
             ),
           );
         },
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(_borderRadius),
-          child: SizedBox(
-            height: 115,
-            width: double.infinity,
-            child: Stack(
-              children: [
-                SvgPicture.string(
-                  SvgStrings.presCardBubbles,
-                  height: 115,
-                  fit: BoxFit.fitHeight,
-                ),
-                BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
-                  child: Container(
-                    color: colors.primaryColor.withValues(alpha: 0.3),
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(_borderRadius),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(
+                  alpha: 0.15,
+                ), // Adjust opacity as needed
+                blurRadius: 12,
+                spreadRadius: 2,
+                offset: const Offset(0, 6), // Shadow goes down
+              ),
+            ],
+          ),
+
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(_borderRadius),
+            child: SizedBox(
+              height: 120,
+              width: double.infinity,
+              child: Stack(
+                children: [
+                  SvgPicture.string(
+                    SvgStrings.presCardBubbles,
+                    height: 115,
+                    fit: BoxFit.fitHeight,
                   ),
-                ),
-                Container(color: colors.secondaryColor.withValues(alpha: 0.6)),
-                // Content
-                Padding(
-                  padding: const EdgeInsets.all(18.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          // Hospital name
-                          Text(
-                            hospitalName,
-                            style: GoogleFonts.notoKufiArabic(
-                              color: colors.textDefaultColor,
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          // Prescription Date
-                          Row(
-                            children: [
-                              SvgPicture.string(SvgStrings.calendar),
-                              const SizedBox(width: 5),
-                              Text(
-                                prescriptionDate,
-                                style: GoogleFonts.notoKufiArabic(
-                                  color: colors.textDefaultColor,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w600,
-                                ),
+                  BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
+                    child: Container(
+                      color: colors.primaryColor.withValues(alpha: 0.1),
+                    ),
+                  ),
+                  Container(
+                    color: colors.secondaryColor.withValues(alpha: 0.8),
+                  ),
+                  // Content
+                  Padding(
+                    padding: const EdgeInsets.all(18.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            // Hospital name
+                            Text(
+                              hospitalName,
+                              style: GoogleFonts.notoKufiArabic(
+                                color: colors.textDefaultColor,
+                                fontSize: 18,
                               ),
-                            ],
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 5),
-                      // Doctor's name
-                      Text(
-                        doctorName ?? '',
-                        style: GoogleFonts.notoKufiArabic(
-                          color: colors.textDefaultColor,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
+                            ),
+                            // Prescription Date
+                            Row(
+                              children: [
+                                SvgPicture.string(
+                                  SvgStrings.calendar,
+                                  colorFilter: ColorFilter.mode(
+                                    colors.textDefaultColor,
+                                    BlendMode.srcIn,
+                                  ),
+                                ),
+                                const SizedBox(width: 5),
+                                Text(
+                                  prescriptionDate,
+                                  style: GoogleFonts.notoKufiArabic(
+                                    color: colors.textDefaultColor,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
-                      ),
-                      const Expanded(child: SizedBox()),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          // patient name
-                          Text(
-                            patientName,
-                            style: GoogleFonts.notoKufiArabic(
-                              color: colors.textLightColor,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                            ),
+                        const SizedBox(height: 5),
+                        // Doctor's name
+                        Text(
+                          doctorName ?? '',
+                          style: GoogleFonts.notoKufiArabic(
+                            color: colors.textDefaultColor,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
                           ),
-                          // Followup Date
-                          Row(
-                            children: [
-                              SvgPicture.string(SvgStrings.followUp),
-                              const SizedBox(width: 5),
-                              Text(
-                                followUpDate ?? '',
-                                style: GoogleFonts.nunito(
-                                  color: colors.territoryColor,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                        ),
+                        const Expanded(child: SizedBox()),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            // patient name
+                            Text(
+                              patientName,
+                              style: GoogleFonts.notoKufiArabic(
+                                color: colors.textLightColor,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
                               ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ],
+                            ),
+                            // Followup Date
+                            Row(
+                              children: [
+                                SvgPicture.string(SvgStrings.followUp),
+                                const SizedBox(width: 5),
+                                Text(
+                                  followUpDate ?? '',
+                                  style: GoogleFonts.notoKufiArabic(
+                                    color: colors.territoryColor,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

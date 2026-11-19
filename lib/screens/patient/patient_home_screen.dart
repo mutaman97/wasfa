@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:erx/screens/patient_profile_screen.dart';
+import 'package:erx/screens/patient/patient_profile_screen.dart';
 import 'package:erx/utils/color_palette.dart';
 import 'package:erx/utils/svg_strings.dart';
 import 'package:erx/utils/toast.dart';
@@ -45,9 +45,7 @@ class PatientHomeScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // Top Extra padding
-                const SizedBox(
-                  height: 20,
-                ),
+                const SizedBox(height: 20),
                 // Top logo/menu/profile
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -70,9 +68,7 @@ class PatientHomeScreen extends StatelessWidget {
                           Column(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              const SizedBox(
-                                height: 5,
-                              ),
+                              const SizedBox(height: 5),
                               Transform.rotate(
                                 angle: 8 * 22 / 7 / 180,
                                 child: SvgPicture.string(
@@ -104,7 +100,10 @@ class PatientHomeScreen extends StatelessWidget {
                                     listen: false,
                                   ).remove("userType");
                                   FirebaseAuth.instance.signOut().then((value) {
-                                    showTextToast("Logout Success!");
+                                    showTopRightToast(
+                                      context,
+                                      "Logout Success!",
+                                    );
                                     Navigator.of(context).pop();
                                   });
                                 },
@@ -162,9 +161,7 @@ class PatientHomeScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 30,
-                ),
+                const SizedBox(height: 30),
                 // Body
                 Expanded(
                   child: Stack(
@@ -187,74 +184,77 @@ class PatientHomeScreen extends StatelessWidget {
                               ),
                               color: ColorPalette.chineseBlack,
                             ),
-                            child: StreamBuilder<
-                                QuerySnapshot<Map<String, dynamic>>>(
+                            child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
                               stream: _prescriptionStream,
-                              builder: (
-                                context,
-                                AsyncSnapshot<
-                                        QuerySnapshot<Map<String, dynamic>>>
+                              builder:
+                                  (
+                                    context,
+                                    AsyncSnapshot<
+                                      QuerySnapshot<Map<String, dynamic>>
+                                    >
                                     snapshot,
-                              ) {
-                                if (snapshot.hasData) {
-                                  return ListView.builder(
-                                    itemCount: snapshot.data!.docs.length + 1,
-                                    itemBuilder: (context, index) {
-                                      if (index == 0) {
-                                        return const SizedBox(
-                                          height: 50,
-                                        );
-                                      }
-                                      return PrescriptionCard(
-                                        prescriptionId :  snapshot.data!.docs[index-1].id,
-                                        doctorName: 
-                                            "Dr. ${snapshot.data!.docs[index - 1].data()['doctorName'] as String}",
-                                        hospitalName: snapshot
-                                            .data!.docs[index - 1]
-                                            .data()['hospital'] as String,
-                                        prescriptionDate: f.format(
-                                          (snapshot.data!.docs[index - 1]
-                                                      .data()['dateTime']
-                                                  as Timestamp)
-                                              .toDate(),
-                                        ),
-                                        followUpDate: snapshot
-                                            .data!.docs[index - 1]
-                                            .data()['followUp'] as String?,
-                                        patientName: (snapshot
-                                                    .data!.docs[index - 1]
-                                                    .data()['patient']
-                                                as Map<String, dynamic>)['name']
-                                            as String,
+                                  ) {
+                                    if (snapshot.hasData) {
+                                      return ListView.builder(
+                                        itemCount:
+                                            snapshot.data!.docs.length + 1,
+                                        itemBuilder: (context, index) {
+                                          if (index == 0) {
+                                            return const SizedBox(height: 50);
+                                          }
+                                          return PrescriptionCard(
+                                            prescriptionId: snapshot
+                                                .data!
+                                                .docs[index - 1]
+                                                .id,
+                                            doctorName:
+                                                "Dr. ${snapshot.data!.docs[index - 1].data()['doctorName'] as String}",
+                                            hospitalName:
+                                                snapshot.data!.docs[index - 1]
+                                                        .data()['hospital']
+                                                    as String,
+                                            prescriptionDate: f.format(
+                                              (snapshot.data!.docs[index - 1]
+                                                          .data()['dateTime']
+                                                      as Timestamp)
+                                                  .toDate(),
+                                            ),
+                                            followUpDate:
+                                                snapshot.data!.docs[index - 1]
+                                                        .data()['followUp']
+                                                    as String?,
+                                            patientName:
+                                                (snapshot.data!.docs[index - 1]
+                                                            .data()['patient']
+                                                        as Map<
+                                                          String,
+                                                          dynamic
+                                                        >)['name']
+                                                    as String,
+                                          );
+                                        },
                                       );
-                                    },
-                                  );
-                                } else {
-                                  return const Center(
-                                    child: SizedBox(
-                                      height: 35,
-                                      width: 35,
-                                      child: CircularProgressIndicator(
-                                        color: ColorPalette.malachiteGreen,
-                                      ),
-                                    ),
-                                  );
-                                }
-                              },
+                                    } else {
+                                      return const Center(
+                                        child: SizedBox(
+                                          height: 35,
+                                          width: 35,
+                                          child: CircularProgressIndicator(
+                                            color: ColorPalette.malachiteGreen,
+                                          ),
+                                        ),
+                                      );
+                                    }
+                                  },
                             ),
                           ),
                         ),
                       ),
                       // Search  box
                       Padding(
-                        padding: const EdgeInsets.only(
-                          left: 40,
-                          right: 40,
-                        ),
+                        padding: const EdgeInsets.only(left: 40, right: 40),
                         child: Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 24,
-                          ),
+                          padding: const EdgeInsets.symmetric(horizontal: 24),
                           height: 60,
                           width: double.infinity,
                           decoration: BoxDecoration(
@@ -262,7 +262,9 @@ class PatientHomeScreen extends StatelessWidget {
                             color: ColorPalette.charlestonGreen,
                             boxShadow: [
                               BoxShadow(
-                                color: ColorPalette.coolGrey.withValues(alpha: 0.3),
+                                color: ColorPalette.coolGrey.withValues(
+                                  alpha: 0.3,
+                                ),
                                 blurRadius: 20,
                                 offset: const Offset(0, 5),
                               ),
@@ -272,9 +274,7 @@ class PatientHomeScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               SvgPicture.string(SvgStrings.search),
-                              const SizedBox(
-                                width: 15,
-                              ),
+                              const SizedBox(width: 15),
                               Expanded(
                                 child: TextField(
                                   textInputAction: TextInputAction.done,

@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:erx/screens/doctor_qualifications_screen.dart';
+import 'package:erx/screens/doctor/doctor_qualifications_screen.dart';
 import 'package:erx/screens/pharmacy_details_screen.dart';
 import 'package:erx/utils/color_palette.dart';
 import 'package:erx/widgets/background_bubbles.dart';
@@ -25,16 +25,10 @@ class SignupScreen extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(
-                height: 75,
-              ),
-              const Expanded(
-                child: SizedBox(),
-              ),
+              const SizedBox(height: 75),
+              const Expanded(child: SizedBox()),
               Padding(
-                padding: const EdgeInsets.only(
-                  left: 20.0,
-                ),
+                padding: const EdgeInsets.only(left: 20.0),
                 child: Text(
                   "Tell us your name",
                   style: GoogleFonts.nunito(
@@ -69,9 +63,7 @@ class SignupScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              const Expanded(
-                child: SizedBox(),
-              ),
+              const Expanded(child: SizedBox()),
               Center(
                 child: MaterialButton(
                   padding: const EdgeInsets.symmetric(
@@ -93,12 +85,10 @@ class SignupScreen extends StatelessWidget {
                       FirebaseFirestore.instance
                           .collection(_userType!)
                           .doc(_phoneNo)
-                          .set(
-                        {
-                          "name": _nameController.text,
-                          "phoneNo": _phoneNo,
-                        },
-                      );
+                          .set({
+                            "name": _nameController.text,
+                            "phoneNo": _phoneNo,
+                          });
                     } else if (_userType == "doctor") {
                       Navigator.of(context).push(
                         MaterialPageRoute(
@@ -131,9 +121,7 @@ class SignupScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 75,
-              ),
+              const SizedBox(height: 75),
             ],
           ),
         ],

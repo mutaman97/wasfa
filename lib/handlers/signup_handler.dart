@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:erx/screens/assistant_home_screen.dart';
-import 'package:erx/screens/doctor_home_screen.dart';
+import 'package:erx/screens/assistant/assistant_home_screen.dart';
+import 'package:erx/screens/auth/signup_screen.dart';
+import 'package:erx/screens/doctor/doctor_home_screen.dart';
 import 'package:erx/screens/error_screen.dart';
-import 'package:erx/screens/patient_home_screen.dart';
-import 'package:erx/screens/pharmacist_home_screen.dart';
-import 'package:erx/screens/signup_screen.dart';
+import 'package:erx/screens/patient/patient_home_screen.dart';
+import 'package:erx/screens/pharmasist/pharmacist_home_screen.dart';
 import 'package:erx/widgets/customer_loader.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

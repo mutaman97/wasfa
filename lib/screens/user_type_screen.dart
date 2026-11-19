@@ -36,12 +36,8 @@ class _UserTypeScreenState extends State<UserTypeScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(
-                  height: 75,
-                ),
-                const Expanded(
-                  child: SizedBox(),
-                ),
+                const SizedBox(height: 75),
+                const Expanded(child: SizedBox()),
                 Center(
                   child: Text(
                     "You are a",
@@ -52,24 +48,22 @@ class _UserTypeScreenState extends State<UserTypeScreen> {
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 30,
-                ),
+                const SizedBox(height: 30),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    GestureDetector(
-                      child: UserTypeTile(
-                        svgString: SvgStrings.patient,
-                        userType: "Patient",
-                        isSelected: _userType == 0,
-                      ),
-                      onTap: () {
-                        setState(() {
-                          _userType = 0;
-                        });
-                      },
-                    ),
+                    // GestureDetector(
+                    //   child: UserTypeTile(
+                    //     svgString: SvgStrings.patient,
+                    //     userType: "Patient",
+                    //     isSelected: _userType == 0,
+                    //   ),
+                    //   onTap: () {
+                    //     setState(() {
+                    //       _userType = 0;
+                    //     });
+                    //   },
+                    // ),
                     GestureDetector(
                       onTap: () {
                         setState(() {
@@ -84,9 +78,7 @@ class _UserTypeScreenState extends State<UserTypeScreen> {
                     ),
                   ],
                 ),
-                const SizedBox(
-                  height: 30,
-                ),
+                const SizedBox(height: 30),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -102,23 +94,21 @@ class _UserTypeScreenState extends State<UserTypeScreen> {
                         isSelected: _userType == 2,
                       ),
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          _userType = 3;
-                        });
-                      },
-                      child: UserTypeTile(
-                        svgString: SvgStrings.assistant,
-                        userType: "Assistant",
-                        isSelected: _userType == 3,
-                      ),
-                    ),
+                    // GestureDetector(
+                    //   onTap: () {
+                    //     setState(() {
+                    //       _userType = 3;
+                    //     });
+                    //   },
+                    //   child: UserTypeTile(
+                    //     svgString: SvgStrings.assistant,
+                    //     userType: "Assistant",
+                    //     isSelected: _userType == 3,
+                    //   ),
+                    // ),
                   ],
                 ),
-                const Expanded(
-                  child: SizedBox(),
-                ),
+                const Expanded(child: SizedBox()),
                 Center(
                   child: MaterialButton(
                     padding: const EdgeInsets.symmetric(
@@ -146,9 +136,7 @@ class _UserTypeScreenState extends State<UserTypeScreen> {
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 75,
-                ),
+                const SizedBox(height: 75),
               ],
             ),
           ),

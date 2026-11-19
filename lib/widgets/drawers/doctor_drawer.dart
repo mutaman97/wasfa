@@ -18,88 +18,73 @@ class const DoctorDrawer({Key? key}) extends StatelessWidget {
   void _showLanguageBottomSheet(BuildContext context) {
     // 1. Capture the provider BEFORE opening the bottom sheet
     final localeProvider = Provider.of<LocaleProvider>(context, listen: false);
+    final colors = Theme.of(context).colorScheme;
 
     showModalBottomSheet(
       context: context,
-      backgroundColor: ColorPalette.chineseBlack,
+      // backgroundColor: colors.backgroundColor,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
       ),
       builder: (BuildContext bottomSheetContext) {
-        return Container(
-          decoration: const BoxDecoration(
-            color: ColorPalette.charlestonGreen,
-            borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
-            boxShadow: [
-              BoxShadow(
-                color: ColorPalette.malachiteGreen,
-                blurRadius: 10,
-                spreadRadius: 0.5,
-                offset: Offset(0, -0.5), // Shadow goes UP
-              ),
-            ],
-          ),
-          child: SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    "Select Language",
-                    style: GoogleFonts.nunito(
-                      color: ColorPalette.honeyDew,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
+        return SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  "Select Language",
+                  style: GoogleFonts.nunito(
+                    color: colors.textDefaultColor,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
                   ),
-                  const SizedBox(height: 20),
+                ),
+                const SizedBox(height: 20),
 
-                  // ENGLISH OPTION
-                  ListTile(
-                    leading: const Icon(
-                      Icons.language,
-                      color: ColorPalette.malachiteGreen,
+                // ENGLISH OPTION
+                ListTile(
+                  leading: Icon(Icons.language, color: colors.territoryColor),
+                  title: Text(
+                    "English",
+                    style: GoogleFonts.notoKufiArabic(
+                      color: colors.textDefaultColor,
                     ),
-                    title: Text(
-                      "English",
-                      style: GoogleFonts.nunito(color: ColorPalette.honeyDew),
-                    ),
-                    trailing: const Icon(
-                      Icons.arrow_forward_ios,
-                      size: 16,
-                      color: ColorPalette.coolGrey,
-                    ),
-                    onTap: () {
-                      // 2. Use the captured provider instead of Provider.of(bottomSheetContext)
-                      localeProvider.setLocale(const Locale('en'));
-                      Navigator.pop(bottomSheetContext); // Close bottom sheet
-                    },
                   ),
+                  trailing: Icon(
+                    Icons.arrow_forward_ios,
+                    size: 16,
+                    color: colors.textDefaultColor,
+                  ),
+                  onTap: () {
+                    // 2. Use the captured provider instead of Provider.of(bottomSheetContext)
+                    localeProvider.setLocale(const Locale('en'));
+                    Navigator.pop(bottomSheetContext); // Close bottom sheet
+                  },
+                ),
 
-                  // ARABIC OPTION
-                  ListTile(
-                    leading: const Icon(
-                      Icons.language,
-                      color: ColorPalette.malachiteGreen,
+                // ARABIC OPTION
+                ListTile(
+                  leading: Icon(Icons.language, color: colors.territoryColor),
+                  title: Text(
+                    "العربية (Arabic)",
+                    style: GoogleFonts.notoKufiArabic(
+                      color: colors.textDefaultColor,
                     ),
-                    title: Text(
-                      "العربية (Arabic)",
-                      style: GoogleFonts.nunito(color: ColorPalette.honeyDew),
-                    ),
-                    trailing: const Icon(
-                      Icons.arrow_forward_ios,
-                      size: 16,
-                      color: ColorPalette.coolGrey,
-                    ),
-                    onTap: () {
-                      // 3. Use the captured provider
-                      localeProvider.setLocale(const Locale('ar'));
-                      Navigator.pop(bottomSheetContext); // Close bottom sheet
-                    },
                   ),
-                ],
-              ),
+                  trailing: Icon(
+                    Icons.arrow_forward_ios,
+                    size: 16,
+                    color: colors.textDefaultColor,
+                  ),
+                  onTap: () {
+                    // 3. Use the captured provider
+                    localeProvider.setLocale(const Locale('ar'));
+                    Navigator.pop(bottomSheetContext); // Close bottom sheet
+                  },
+                ),
+              ],
             ),
           ),
         );
@@ -178,21 +163,21 @@ class const DoctorDrawer({Key? key}) extends StatelessWidget {
           ),
 
           // Menu Items
-          _buildDrawerItem(
-            context: context,
-            icon: Icons.home_outlined,
-            title: 'Home',
-            onTap: () => Navigator.pop(context),
-          ),
-          _buildDrawerItem(
-            context: context,
-            icon: Icons.history,
-            title: 'Prescription History',
-            onTap: () {
-              Navigator.pop(context);
-              // Add navigation logic here
-            },
-          ),
+          // _buildDrawerItem(
+          //   context: context,
+          //   icon: Icons.home_outlined,
+          //   title: 'Home',
+          //   onTap: () => Navigator.pop(context),
+          // ),
+          // _buildDrawerItem(
+          //   context: context,
+          //   icon: Icons.history,
+          //   title: 'Prescription History',
+          //   onTap: () {
+          //     Navigator.pop(context);
+          //     // Add navigation logic here
+          //   },
+          // ),
           _buildDrawerItem(
             context: context,
             icon: Icons.person_outline,

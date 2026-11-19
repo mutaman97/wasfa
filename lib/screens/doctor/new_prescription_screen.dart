@@ -53,10 +53,7 @@ class _NewPrescriptionScreenState extends State<NewPrescriptionScreen> {
       textInputAction: TextInputAction.done,
       controller: controller,
       keyboardType: type,
-      style: GoogleFonts.nunito(
-        fontSize: 20,
-        color: ColorPalette.honeyDew,
-      ),
+      style: GoogleFonts.nunito(fontSize: 20, color: ColorPalette.honeyDew),
       decoration: InputDecoration(
         helperText: hint,
         helperStyle: GoogleFonts.nunito(
@@ -128,38 +125,43 @@ class _NewPrescriptionScreenState extends State<NewPrescriptionScreen> {
                   onPressed: () async {
                     final String _docID =
                         FirebaseAuth.instance.currentUser!.phoneNumber!;
-                    final String _docName = (await FirebaseFirestore.instance
-                            .collection("doctor")
-                            .doc(_docID)
-                            .get())
-                        .data()!["name"] as String;
-                    FirebaseFirestore.instance.collection("prescription").add({
-                      "doctorID": _docID,
-                      "doctorName": _docName,
-                      "hospital": _hospitalNameController.text,
-                      "dateTime": DateTime.now(),
-                      "patientPhone": "+971${_patientNumberController.text}",
-                      "patient": {
-                        "name": _patientNameController.text,
-                        "age": _ageController.text,
-                        "gender": _ageController.text,
-                        "generalInfo": {
-                          "temperature": _temperatureController.text,
-                          "bp": _bpController.text,
-                          "weight": _weightController.text,
-                        },
-                      },
-                      "knownHistory": _knownHistoryController.text,
-                      "diagnosis": _diagnosisController.text,
-                      "advice": _adviceController.text,
-                      "followUp": _followUpController.text,
-                    }).then((value) {
-                      showTextToast("Prescription added successfully");
-                      Navigator.of(context).pop();
-                    });
+                    final String _docName =
+                        (await FirebaseFirestore.instance
+                                    .collection("doctor")
+                                    .doc(_docID)
+                                    .get())
+                                .data()!["name"]
+                            as String;
+                    FirebaseFirestore.instance
+                        .collection("prescription")
+                        .add({
+                          "doctorID": _docID,
+                          "doctorName": _docName,
+                          "hospital": _hospitalNameController.text,
+                          "dateTime": DateTime.now(),
+                          "patientPhone": "971${_patientNumberController.text}",
+                          "patient": {
+                            "name": _patientNameController.text,
+                            "age": _ageController.text,
+                            "gender": _ageController.text,
+                            "generalInfo": {
+                              "temperature": _temperatureController.text,
+                              "bp": _bpController.text,
+                              "weight": _weightController.text,
+                            },
+                          },
+                          "knownHistory": _knownHistoryController.text,
+                          "diagnosis": _diagnosisController.text,
+                          "advice": _adviceController.text,
+                          "followUp": _followUpController.text,
+                        })
+                        .then((value) {
+                          showTextToast("Prescription added successfully");
+                          Navigator.of(context).pop();
+                        });
                   },
                   backgroundColor: Theme.of(context).primaryColor,
-                  shape: const CircleBorder(), 
+                  shape: const CircleBorder(),
                   child: const Icon(Icons.done),
                 ),
               ),

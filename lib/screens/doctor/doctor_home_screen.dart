@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:erx/app/app_localization.dart';
 import 'package:erx/app/app_theme.dart';
-import 'package:erx/screens/new_prescription_screen.dart';
+import 'package:erx/screens/doctor/new_prescription_screen.dart';
 import 'package:erx/utils/color_palette.dart';
 import 'package:erx/utils/svg_strings.dart';
 import 'package:erx/utils/toast.dart';
@@ -326,14 +326,14 @@ class DoctorHomeScreen extends StatelessWidget {
                                         'Search for prescription',
                                     hintStyle: GoogleFonts.notoKufiArabic(
                                       fontSize: 16,
-                                      color: colors.textDefaultColor,
+                                      color: colors.textLightColor,
                                     ),
                                   ),
-                                  style: GoogleFonts.nunito(
+                                  style: GoogleFonts.notoKufiArabic(
                                     fontSize: 16,
                                     color: colors.textDefaultColor,
                                   ),
-                                  cursorColor: colors.textDefaultColor,
+                                  cursorColor: colors.territoryColor,
                                 ),
                               ),
                             ],

@@ -1,4 +1,4 @@
-import 'package:erx/screens/splash_screen_2.dart';
+import 'package:erx/screens/splash/splash_screen_2.dart';
 import 'package:erx/utils/color_palette.dart';
 import 'package:erx/utils/svg_strings.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 class SplashScreen1 extends StatefulWidget {
   const SplashScreen1({Key? key, required this.playAnimation})
-      : super(key: key);
+    : super(key: key);
   final bool playAnimation;
 
   @override
@@ -19,17 +19,14 @@ class _SplashScreen1State extends State<SplashScreen1> {
   void initState() {
     super.initState();
     if (widget.playAnimation) {
-      Future.delayed(
-        const Duration(seconds: 2),
-        () {
-          Navigator.of(context).pushReplacement(
-            PageRouteBuilder(
-              transitionDuration: const Duration(milliseconds: 700),
-              pageBuilder: (context, a1, a2) => const SplashScreen2(),
-            ),
-          );
-        },
-      );
+      Future.delayed(const Duration(seconds: 2), () {
+        Navigator.of(context).pushReplacement(
+          PageRouteBuilder(
+            transitionDuration: const Duration(milliseconds: 700),
+            pageBuilder: (context, a1, a2) => const SplashScreen2(),
+          ),
+        );
+      });
     }
   }
 
@@ -44,9 +41,7 @@ class _SplashScreen1State extends State<SplashScreen1> {
               tag: "e",
               child: Transform.rotate(
                 angle: 8 * 22 / 7 / 180,
-                child: SvgPicture.string(
-                  SvgStrings.logoE,
-                ),
+                child: SvgPicture.string(SvgStrings.logoE),
               ),
             ),
           ),
