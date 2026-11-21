@@ -1,15 +1,16 @@
 import 'package:erx/app/app_localization.dart';
 import 'package:erx/app/app_theme.dart';
 import 'package:erx/data/cubits/system/app_theme_cubit.dart';
+import 'package:erx/data/cubits/system/drug_interaction/drug_interaction_cubit.dart';
 import 'package:erx/providers/locale_provider.dart';
 import 'package:erx/screens/splash/splash_screen_1.dart';
 // import 'package:erx/utils/color_palette.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,7 +32,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     // Provide BOTH the Cubit and the LocaleProvider
     return MultiBlocProvider(
-      providers: [BlocProvider(create: (_) => AppThemeCubit())],
+      providers: [
+        BlocProvider(create: (_) => AppThemeCubit()),
+        BlocProvider(create: (_) => DrugInteractionCubit()),
+      ],
 
       // 3. Wrap MaterialApp with ChangeNotifierProvider
       child: ChangeNotifierProvider(

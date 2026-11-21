@@ -1,4 +1,4 @@
-import 'package:erx/screens/otp_screen.dart';
+import 'package:erx/screens/auth/otp_screen.dart';
 import 'package:erx/app/app_theme.dart';
 import 'package:erx/utils/color_palette.dart';
 import 'package:erx/widgets/background_bubbles.dart';

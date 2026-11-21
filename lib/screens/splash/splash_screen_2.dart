@@ -17,6 +17,7 @@ class _SplashScreen2State extends State<SplashScreen2> {
   void initState() {
     super.initState();
     Future.delayed(const Duration(milliseconds: 1100), () {
+      if (!mounted) return;
       Navigator.of(context).pushReplacement(
         PageRouteBuilder(
           transitionDuration: const Duration(seconds: 1),
@@ -54,7 +55,7 @@ class _SplashScreen2State extends State<SplashScreen2> {
                   child: Material(
                     color: Colors.transparent,
                     child: Text(
-                      "prescription",
+                      "wasfa",
                       style: GoogleFonts.nunito(
                         color: ColorPalette.honeyDew,
                         fontSize: 48,

@@ -1,6 +1,7 @@
 import 'package:erx/app/app_theme.dart';
 import 'package:erx/data/cubits/system/app_theme_cubit.dart';
 import 'package:erx/providers/locale_provider.dart';
+import 'package:erx/screens/doctor/doctor_profile_screen.dart';
 import 'package:erx/utils/color_palette.dart';
 import 'package:erx/utils/svg_strings.dart';
 import 'package:erx/utils/toast.dart';
@@ -43,9 +44,12 @@ class const DoctorDrawer({Key? key}) extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
 
-                // ENGLISH OPTION
+                // ENGLISH OPTION (UK Flag)
                 ListTile(
-                  leading: Icon(Icons.language, color: colors.territoryColor),
+                  leading: const Text(
+                    "🇬🇧", // UK Flag Emoji
+                    style: TextStyle(fontSize: 20),
+                  ),
                   title: Text(
                     "English",
                     style: GoogleFonts.notoKufiArabic(
@@ -58,15 +62,17 @@ class const DoctorDrawer({Key? key}) extends StatelessWidget {
                     color: colors.textDefaultColor,
                   ),
                   onTap: () {
-                    // 2. Use the captured provider instead of Provider.of(bottomSheetContext)
                     localeProvider.setLocale(const Locale('en'));
-                    Navigator.pop(bottomSheetContext); // Close bottom sheet
+                    Navigator.pop(bottomSheetContext);
                   },
                 ),
 
-                // ARABIC OPTION
+                // ARABIC OPTION (Sudan Flag)
                 ListTile(
-                  leading: Icon(Icons.language, color: colors.territoryColor),
+                  leading: const Text(
+                    "🇸🇩", // Sudan Flag Emoji
+                    style: TextStyle(fontSize: 20),
+                  ),
                   title: Text(
                     "العربية (Arabic)",
                     style: GoogleFonts.notoKufiArabic(
@@ -79,9 +85,8 @@ class const DoctorDrawer({Key? key}) extends StatelessWidget {
                     color: colors.textDefaultColor,
                   ),
                   onTap: () {
-                    // 3. Use the captured provider
                     localeProvider.setLocale(const Locale('ar'));
-                    Navigator.pop(bottomSheetContext); // Close bottom sheet
+                    Navigator.pop(bottomSheetContext);
                   },
                 ),
               ],
@@ -180,8 +185,12 @@ class const DoctorDrawer({Key? key}) extends StatelessWidget {
             icon: Icons.person_outline,
             title: 'My Profile',
             onTap: () {
-              Navigator.pop(context);
-              // Add navigation logic here
+              Navigator.pop(context); // Closes the drawer
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const DoctorProfileScreen(),
+                ),
+              );
             },
           ),
           _buildDrawerItem(

@@ -1,10 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:erx/app/app_localization.dart';
 import 'package:erx/app/app_theme.dart';
+import 'package:erx/screens/doctor/doctor_patients_screen.dart';
+import 'package:erx/screens/doctor/doctor_profile_screen.dart';
 import 'package:erx/screens/doctor/new_prescription_screen.dart';
+import 'package:erx/screens/drug/drug_interactions_screen.dart';
 import 'package:erx/utils/color_palette.dart';
 import 'package:erx/utils/svg_strings.dart';
 import 'package:erx/utils/toast.dart';
+import 'package:erx/widgets/doctor_bottom_nav_bar.dart';
 import 'package:erx/widgets/drawers/doctor_drawer.dart';
 import 'package:erx/widgets/prescription_card.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -115,12 +119,15 @@ class DoctorHomeScreen extends StatelessWidget {
                       // Profile
                       GestureDetector(
                         onTap: () {
-                          // Navigator.pop(context);
-                          // Add navigation logic here
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => const DoctorProfileScreen(),
+                            ),
+                          );
                         },
                         child: SizedBox(
-                          height: 38,
-                          width: 38,
+                          height: 40,
+                          width: 40,
                           child: SvgPicture.string(SvgStrings.profile),
                         ),
                       ),
@@ -217,6 +224,10 @@ class DoctorHomeScreen extends StatelessWidget {
                                       ) {
                                         if (snapshot.hasData) {
                                           return ListView.builder(
+                                            padding: const EdgeInsets.only(
+                                              top: 1,
+                                              bottom: 80,
+                                            ),
                                             itemCount:
                                                 snapshot.data!.docs.length + 1,
                                             itemBuilder: (context, index) {
@@ -378,44 +389,37 @@ class DoctorHomeScreen extends StatelessWidget {
                       ),
                       Positioned(
                         bottom: 0,
-                        child: Container(
-                          width: MediaQuery.of(context).size.width,
-                          height: 60,
-                          decoration: BoxDecoration(
-                            color: colors.secondaryColor,
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(30),
-                              topRight: Radius.circular(30),
-                            ),
-                          ),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: Center(
-                                  child: Text(
-                                    "Hospitals",
-                                    style: GoogleFonts.nunito(
-                                      fontSize: 16,
-                                      color: colors.textDefaultColor,
-                                      fontWeight: FontWeight.w700,
-                                    ),
-                                  ),
+                        left: 0,
+                        right: 0,
+                        child: DoctorBottomNavBar(
+                          currentIndex: 0, // We are on the Home screen
+                          onTap: (index) {
+                            if (index == 0) {
+                              // Already on Home, do nothing
+                            } else if (index == 1) {
+                              Navigator.of(context).pushAndRemoveUntil(
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const DoctorPatientsScreen(),
                                 ),
-                              ),
-                              Expanded(
-                                child: Center(
-                                  child: Text(
-                                    "Invitations",
-                                    style: GoogleFonts.nunito(
-                                      fontSize: 16,
-                                      color: colors.textDefaultColor,
-                                      fontWeight: FontWeight.w700,
-                                    ),
-                                  ),
+                                (route) => false, // Clear history so back button doesn't go weird
+                              );
+                            } else if (index == 2) {
+                              Navigator.of(context, rootNavigator: true).push(
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const DrugInteractionsScreen(),
                                 ),
-                              ),
-                            ],
-                          ),
+                              );
+                            } else if (index == 3) {
+                              Navigator.of(context, rootNavigator: true).push(
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const DoctorProfileScreen(),
+                                ),
+                              );
+                            }
+                          },
                         ),
                       ),
                       Align(
