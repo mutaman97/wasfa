@@ -17,8 +17,8 @@ class PrescriptionCard extends StatelessWidget {
     required this.patientName,
     required this.prescriptionDate,
     this.followUpDate,
-    required this.prescriptionId,
-    // Add the rest of the fields here so they can be passed from Firestore
+    required this.prescriptionId, // The internal Firestore ID (for routing)
+    required this.displayId, // The readable ID (e.g. RX-A7K9M2Q4)
     this.hospitalAddress,
     this.patientAge,
     this.patientTemp,
@@ -28,14 +28,15 @@ class PrescriptionCard extends StatelessWidget {
     this.knownHistory,
     this.diagnosis,
   }) : super(key: key);
+
   final String hospitalName;
-  final String prescriptionId;
+  final String prescriptionId; // internal ID
+  final String displayId; // readable ID
   final String? doctorName;
   final String patientName;
   final String prescriptionDate;
   final String? followUpDate;
 
-  // New fields
   final String? hospitalAddress;
   final int? patientAge;
   final int? patientTemp;
@@ -48,7 +49,6 @@ class PrescriptionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
-    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
@@ -57,7 +57,8 @@ class PrescriptionCard extends StatelessWidget {
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (context) => PrescriptionScreen(
-                prescriptionId: prescriptionId,
+                prescriptionId: prescriptionId, // Pass internal ID
+                displayId: displayId, // Pass readable ID if needed later
                 doctorName: doctorName ?? 'Unknown Doctor',
                 hospitalName: hospitalName,
                 patientName: patientName,
@@ -79,20 +80,17 @@ class PrescriptionCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(_borderRadius),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withValues(
-                  alpha: 0.15,
-                ), // Adjust opacity as needed
+                color: Colors.black.withValues(alpha: 0.15),
                 blurRadius: 12,
                 spreadRadius: 2,
-                offset: const Offset(0, 6), // Shadow goes down
+                offset: const Offset(0, 6),
               ),
             ],
           ),
-
           child: ClipRRect(
             borderRadius: BorderRadius.circular(_borderRadius),
             child: SizedBox(
-              height: 120,
+              height: 125,
               width: double.infinity,
               child: Stack(
                 children: [
@@ -119,20 +117,64 @@ class PrescriptionCard extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            // Hospital name
+                            // Patient name
                             Expanded(
+                              flex: 2,
                               child: Text(
-                                hospitalName,
+                                patientName,
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 style: GoogleFonts.notoKufiArabic(
                                   color: colors.textDefaultColor,
-                                  fontSize: 18,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
                             ),
-                            const SizedBox(width: 8), // Spacing
-                            // Prescription Date
+                            const SizedBox(width: 8),
+                            // Display ID (e.g., RX-A7K9M2Q4)
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 8,
+                                vertical: 4,
+                              ),
+                              decoration: BoxDecoration(
+                                color: colors.territoryColor.withValues(
+                                  alpha: 0.1,
+                                ),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Text(
+                                'RX-$displayId',
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: GoogleFonts.nunito(
+                                  color: colors.territoryColor,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w800,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 5),
+                        // Diagnosis
+                        Expanded(
+                          child: Text(
+                            diagnosis ?? '',
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: GoogleFonts.notoKufiArabic(
+                              color: colors.textDefaultColor,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                        const Expanded(child: SizedBox()),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
                             Row(
                               children: [
                                 SvgPicture.string(
@@ -153,40 +195,7 @@ class PrescriptionCard extends StatelessWidget {
                                 ),
                               ],
                             ),
-                          ],
-                        ),
-                        const SizedBox(height: 5),
-                        // Doctor's name
-                        Expanded(
-                          child: Text(
-                            doctorName ?? '',
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: GoogleFonts.notoKufiArabic(
-                              color: colors.textDefaultColor,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ),
-                        const Expanded(child: SizedBox()),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            // patient name
-                            Expanded(
-                              child: Text(
-                                patientName,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: GoogleFonts.notoKufiArabic(
-                                  color: colors.textDefaultColor,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(width: 8), // Spacing
+                            const SizedBox(width: 8),
                             // Followup Date
                             Row(
                               children: [

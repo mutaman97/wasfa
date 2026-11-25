@@ -123,11 +123,21 @@ class _NewPrescriptionScreenState extends State<NewPrescriptionScreen> {
       }
 
       // Save to Firestore
-      await FirebaseFirestore.instance.collection("prescription").add({
+      // 1. Create the document reference first (generates a unique ID locally)
+      final docRef = FirebaseFirestore.instance
+          .collection("prescription")
+          .doc();
+
+      // 2. Generate the displayId from the first 8 characters
+      final String displayId = docRef.id.substring(0, 8).toUpperCase();
+
+      // 3. Use .set() instead of .add()
+      await docRef.set({
+        "displayId": displayId, // <-- The human-readable ID
         "doctorID": docID,
         "doctorName": docName,
         "hospital": _hospitalNameController.text,
-        "dateTime": FieldValue.serverTimestamp(), // Use Timestamp, not String
+        "dateTime": FieldValue.serverTimestamp(),
         "patientPhone": "971${_patientNumberController.text}",
         "patient": {
           "name": _patientNameController.text,
@@ -142,7 +152,7 @@ class _NewPrescriptionScreenState extends State<NewPrescriptionScreen> {
         "knownHistory": _knownHistoryController.text,
         "diagnosis": _diagnosisController.text,
         "advice": _adviceController.text,
-        "medications": medications, // Added the medications array
+        "medications": medications,
         "followUp": followUpText,
       });
 
@@ -247,14 +257,15 @@ class _NewPrescriptionScreenState extends State<NewPrescriptionScreen> {
 
           // 3. The Floating Circular Button
           Align(
-            alignment: Alignment.bottomRight,
+            alignment: AlignmentDirectional.bottomEnd,
             child: Padding(
               padding: const EdgeInsets.all(30.0),
               child: FloatingActionButton(
+                heroTag: "prescription_fab",
                 onPressed: _isLoading
                     ? null
                     : _savePrescription, // Use the function from earlier
-                backgroundColor: primaryGreen,
+                backgroundColor: colors.territoryColor,
                 shape: const CircleBorder(),
                 child: _isLoading
                     ? const CircularProgressIndicator(color: Colors.white)

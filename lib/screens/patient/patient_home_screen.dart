@@ -207,6 +207,11 @@ class PatientHomeScreen extends StatelessWidget {
                                                 .data!
                                                 .docs[index - 1]
                                                 .id,
+                                            displayId:
+                                                snapshot.data!.docs[index - 1]
+                                                        .data()['displayId']
+                                                    as String? ??
+                                                'NO-ID',
                                             doctorName:
                                                 "Dr. ${snapshot.data!.docs[index - 1].data()['doctorName'] as String}",
                                             hospitalName:

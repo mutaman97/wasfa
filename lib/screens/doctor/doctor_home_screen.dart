@@ -36,6 +36,7 @@ class DoctorHomeScreen extends StatelessWidget {
           "doctorID",
           isEqualTo: FirebaseAuth.instance.currentUser!.phoneNumber,
         )
+        .orderBy('dateTime', descending: true)
         .snapshots();
     final _searchController = TextEditingController();
 
@@ -261,6 +262,10 @@ class DoctorHomeScreen extends StatelessWidget {
 
                                               return PrescriptionCard(
                                                 prescriptionId: doc.id,
+                                                displayId:
+                                                    data['displayId']
+                                                        as String? ??
+                                                    'NULL',
                                                 hospitalName:
                                                     data['hospital']
                                                         as String? ??
@@ -427,6 +432,7 @@ class DoctorHomeScreen extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.only(bottom: 30),
                           child: FloatingActionButton(
+                            heroTag: "prescription_fab",
                             onPressed: () {
                               Navigator.of(context).push(
                                 MaterialPageRoute(

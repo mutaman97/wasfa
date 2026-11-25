@@ -2,6 +2,7 @@ import 'package:erx/app/app_theme.dart';
 import 'package:erx/screens/doctor/doctor_profile_screen.dart'; // Adjust paths as needed
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:iconsax/iconsax.dart';
 
 class DoctorBottomNavBar extends StatelessWidget {
   final int currentIndex;
@@ -40,7 +41,8 @@ class DoctorBottomNavBar extends StatelessWidget {
           _buildNavItem(
             context: context,
             index: 0,
-            icon: Icons.home_rounded,
+            // Iconsax has 'Bulk' (modern dual-tone) or 'Outline'
+            icon: currentIndex == 0 ? Iconsax.home_11 : Iconsax.home_2,
             label: "Home",
             colors: colors,
           ),
@@ -49,7 +51,7 @@ class DoctorBottomNavBar extends StatelessWidget {
           _buildNavItem(
             context: context,
             index: 1,
-            icon: Icons.people_outline,
+            icon: currentIndex == 1 ? Iconsax.people5 : Iconsax.people,
             label: "Patients",
             colors: colors,
           ),
@@ -61,7 +63,9 @@ class DoctorBottomNavBar extends StatelessWidget {
           _buildNavItem(
             context: context,
             index: 2,
-            icon: Icons.medication_outlined,
+            icon: currentIndex == 2
+                ? Iconsax.health5
+                : Iconsax.health, // or Iconsax.hospital
             label: "Interactions",
             colors: colors,
           ),
@@ -70,7 +74,7 @@ class DoctorBottomNavBar extends StatelessWidget {
           _buildNavItem(
             context: context,
             index: 3,
-            icon: Icons.person_outline_rounded,
+            icon: currentIndex == 3 ? Iconsax.user : Iconsax.user,
             label: "Profile",
             colors: colors,
           ),

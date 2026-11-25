@@ -35,9 +35,7 @@ class PharmacistHomeScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // Top Extra padding
-                const SizedBox(
-                  height: 20,
-                ),
+                const SizedBox(height: 20),
                 // Top logo/menu/profile
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -60,9 +58,7 @@ class PharmacistHomeScreen extends StatelessWidget {
                           Column(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              const SizedBox(
-                                height: 5,
-                              ),
+                              const SizedBox(height: 5),
                               Transform.rotate(
                                 angle: 8 * 22 / 7 / 180,
                                 child: SvgPicture.string(
@@ -144,9 +140,7 @@ class PharmacistHomeScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 30,
-                ),
+                const SizedBox(height: 30),
                 // Body
                 Expanded(
                   child: Stack(
@@ -180,9 +174,7 @@ class PharmacistHomeScreen extends StatelessWidget {
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                                const SizedBox(
-                                  height: 60,
-                                ),
+                                const SizedBox(height: 60),
                                 Text(
                                   "Enter Prescription ID",
                                   style: GoogleFonts.nunito(
@@ -191,9 +183,7 @@ class PharmacistHomeScreen extends StatelessWidget {
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                                const SizedBox(
-                                  height: 30,
-                                ),
+                                const SizedBox(height: 30),
                                 Padding(
                                   padding: const EdgeInsets.symmetric(
                                     horizontal: 50,
@@ -219,9 +209,7 @@ class PharmacistHomeScreen extends StatelessWidget {
                                     onCompleted: (value) {},
                                   ),
                                 ),
-                                const SizedBox(
-                                  height: 120,
-                                ),
+                                const SizedBox(height: 120),
                                 Center(
                                   child: MaterialButton(
                                     padding: const EdgeInsets.symmetric(
@@ -237,21 +225,23 @@ class PharmacistHomeScreen extends StatelessWidget {
                                         MaterialPageRoute(
                                           builder: (context) =>
                                               const PrescriptionScreen(
-                                            prescriptionId: "1234",
-                                            hospitalName: "ABC hosp",
-                                            doctorName: "xyz def",
-                                            hospitalAddress:
-                                                "Lane 1, lane 2, pincode",
-                                            prescriptionDate: "25-03-2022",
-                                            patientName: "Xyz Abc",
-                                            diagnosis: "X test",
-                                            knownHistory: "Diabetes, headache",
-                                            patientAge: 25,
-                                            patientBp: "120/80",
-                                            patientHeight: "5.5",
-                                            patientTemp: 37,
-                                            patientWeight: 76,
-                                          ),
+                                                prescriptionId: "1234",
+                                                displayId: "LBF0ATC3",
+                                                hospitalName: "ABC hosp",
+                                                doctorName: "xyz def",
+                                                hospitalAddress:
+                                                    "Lane 1, lane 2, pincode",
+                                                prescriptionDate: "25-03-2022",
+                                                patientName: "Xyz Abc",
+                                                diagnosis: "X test",
+                                                knownHistory:
+                                                    "Diabetes, headache",
+                                                patientAge: 25,
+                                                patientBp: "120/80",
+                                                patientHeight: "5.5",
+                                                patientTemp: 37,
+                                                patientWeight: 76,
+                                              ),
                                         ),
                                       );
                                     },
@@ -272,14 +262,9 @@ class PharmacistHomeScreen extends StatelessWidget {
                       ),
                       // Search  box
                       Padding(
-                        padding: const EdgeInsets.only(
-                          left: 40,
-                          right: 40,
-                        ),
+                        padding: const EdgeInsets.only(left: 40, right: 40),
                         child: Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 24,
-                          ),
+                          padding: const EdgeInsets.symmetric(horizontal: 24),
                           height: 60,
                           width: double.infinity,
                           decoration: BoxDecoration(
@@ -287,7 +272,9 @@ class PharmacistHomeScreen extends StatelessWidget {
                             color: ColorPalette.charlestonGreen,
                             boxShadow: [
                               BoxShadow(
-                                color: ColorPalette.coolGrey.withValues(alpha: 0.3),
+                                color: ColorPalette.coolGrey.withValues(
+                                  alpha: 0.3,
+                                ),
                                 blurRadius: 20,
                                 offset: const Offset(0, 5),
                               ),
@@ -297,9 +284,7 @@ class PharmacistHomeScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               SvgPicture.string(SvgStrings.search),
-                              const SizedBox(
-                                width: 15,
-                              ),
+                              const SizedBox(width: 15),
                               Expanded(
                                 child: TextField(
                                   textInputAction: TextInputAction.done,
